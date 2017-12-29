@@ -1,0 +1,30 @@
+function fbsens1
+
+close all
+
+% 4cm-30cm
+distance=[3:1:6,8:2:12,15:3:36];
+voltage=[3.05,2.6,];
+
+invdist=1./distance;
+
+[line1]=polyfit(invdist,voltage,1)
+
+
+figure(1)
+hold on
+plot(distance,voltage,'b.');
+
+xlabel('distance')
+ylabel('voltage')
+hold off
+
+
+figure(2)
+hold on
+plot(invdist,voltage,'b.');
+plot(invdist,polyval(line1,invdist,'g'));
+
+xlabel('1/distance')
+ylabel('voltage')
+hold off

@@ -1,0 +1,939 @@
+
+Test_Control.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000520  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000022  00800100  00000520  00000594  2**0
+                  ALLOC
+  2 .debug_aranges 00000020  00000000  00000000  00000594  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000017a  00000000  00000000  000005b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000039e  00000000  00000000  0000072e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000010e  00000000  00000000  00000acc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000047a  00000000  00000000  00000bda  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000110  00000000  00000000  00001054  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000001b6  00000000  00000000  00001164  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 38 00 	jmp	0x70	; 0x70 <__ctors_end>
+   4:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+   8:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+   c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  10:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  14:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  18:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  1c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  20:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  24:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  28:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  2c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  30:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  34:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  38:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  3c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  40:	0c 94 57 00 	jmp	0xae	; 0xae <__vector_16>
+  44:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  48:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  4c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  50:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  54:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  58:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  5c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  60:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  64:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  68:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+  6c:	0c 94 55 00 	jmp	0xaa	; 0xaa <__bad_interrupt>
+
+00000070 <__ctors_end>:
+  70:	11 24       	eor	r1, r1
+  72:	1f be       	out	0x3f, r1	; 63
+  74:	cf ef       	ldi	r28, 0xFF	; 255
+  76:	d0 e1       	ldi	r29, 0x10	; 16
+  78:	de bf       	out	0x3e, r29	; 62
+  7a:	cd bf       	out	0x3d, r28	; 61
+
+0000007c <__do_copy_data>:
+  7c:	11 e0       	ldi	r17, 0x01	; 1
+  7e:	a0 e0       	ldi	r26, 0x00	; 0
+  80:	b1 e0       	ldi	r27, 0x01	; 1
+  82:	e0 e2       	ldi	r30, 0x20	; 32
+  84:	f5 e0       	ldi	r31, 0x05	; 5
+  86:	02 c0       	rjmp	.+4      	; 0x8c <.do_copy_data_start>
+
+00000088 <.do_copy_data_loop>:
+  88:	05 90       	lpm	r0, Z+
+  8a:	0d 92       	st	X+, r0
+
+0000008c <.do_copy_data_start>:
+  8c:	a0 30       	cpi	r26, 0x00	; 0
+  8e:	b1 07       	cpc	r27, r17
+  90:	d9 f7       	brne	.-10     	; 0x88 <.do_copy_data_loop>
+
+00000092 <__do_clear_bss>:
+  92:	11 e0       	ldi	r17, 0x01	; 1
+  94:	a0 e0       	ldi	r26, 0x00	; 0
+  96:	b1 e0       	ldi	r27, 0x01	; 1
+  98:	01 c0       	rjmp	.+2      	; 0x9c <.do_clear_bss_start>
+
+0000009a <.do_clear_bss_loop>:
+  9a:	1d 92       	st	X+, r1
+
+0000009c <.do_clear_bss_start>:
+  9c:	a2 32       	cpi	r26, 0x22	; 34
+  9e:	b1 07       	cpc	r27, r17
+  a0:	e1 f7       	brne	.-8      	; 0x9a <.do_clear_bss_loop>
+  a2:	0e 94 5d 02 	call	0x4ba	; 0x4ba <main>
+  a6:	0c 94 8e 02 	jmp	0x51c	; 0x51c <_exit>
+
+000000aa <__bad_interrupt>:
+  aa:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ae <__vector_16>:
+stateControl move;		  //controls car motion
+
+//**********************************************************
+//timer 0 overflow ISR
+ISR (TIMER0_COMPA_vect) 
+begin      
+  ae:	1f 92       	push	r1
+  b0:	0f 92       	push	r0
+  b2:	0f b6       	in	r0, 0x3f	; 63
+  b4:	0f 92       	push	r0
+  b6:	11 24       	eor	r1, r1
+  b8:	8f 93       	push	r24
+  ba:	9f 93       	push	r25
+  //Decrement the time if not already zero
+  if (time0>0)	--time0;
+  bc:	80 91 1e 01 	lds	r24, 0x011E
+  c0:	90 91 1f 01 	lds	r25, 0x011F
+  c4:	18 16       	cp	r1, r24
+  c6:	19 06       	cpc	r1, r25
+  c8:	4c f4       	brge	.+18     	; 0xdc <__vector_16+0x2e>
+  ca:	80 91 1e 01 	lds	r24, 0x011E
+  ce:	90 91 1f 01 	lds	r25, 0x011F
+  d2:	01 97       	sbiw	r24, 0x01	; 1
+  d4:	90 93 1f 01 	sts	0x011F, r25
+  d8:	80 93 1e 01 	sts	0x011E, r24
+  if (time1>0)	--time1;
+  dc:	80 91 12 01 	lds	r24, 0x0112
+  e0:	90 91 13 01 	lds	r25, 0x0113
+  e4:	18 16       	cp	r1, r24
+  e6:	19 06       	cpc	r1, r25
+  e8:	4c f4       	brge	.+18     	; 0xfc <__vector_16+0x4e>
+  ea:	80 91 12 01 	lds	r24, 0x0112
+  ee:	90 91 13 01 	lds	r25, 0x0113
+  f2:	01 97       	sbiw	r24, 0x01	; 1
+  f4:	90 93 13 01 	sts	0x0113, r25
+  f8:	80 93 12 01 	sts	0x0112, r24
+  if (time2>0)	--time2;
+  fc:	80 91 20 01 	lds	r24, 0x0120
+ 100:	90 91 21 01 	lds	r25, 0x0121
+ 104:	18 16       	cp	r1, r24
+ 106:	19 06       	cpc	r1, r25
+ 108:	4c f4       	brge	.+18     	; 0x11c <__vector_16+0x6e>
+ 10a:	80 91 20 01 	lds	r24, 0x0120
+ 10e:	90 91 21 01 	lds	r25, 0x0121
+ 112:	01 97       	sbiw	r24, 0x01	; 1
+ 114:	90 93 21 01 	sts	0x0121, r25
+ 118:	80 93 20 01 	sts	0x0120, r24
+end  
+ 11c:	9f 91       	pop	r25
+ 11e:	8f 91       	pop	r24
+ 120:	0f 90       	pop	r0
+ 122:	0f be       	out	0x3f, r0	; 63
+ 124:	0f 90       	pop	r0
+ 126:	1f 90       	pop	r1
+ 128:	18 95       	reti
+
+0000012a <moveCar>:
+//********************************************************** 
+//moveCar
+//
+//********************************************************** 
+void moveCar(void)
+{
+ 12a:	20 91 0a 01 	lds	r18, 0x010A
+ 12e:	30 91 0b 01 	lds	r19, 0x010B
+ 132:	21 15       	cp	r18, r1
+ 134:	31 05       	cpc	r19, r1
+ 136:	29 f0       	breq	.+10     	; 0x142 <moveCar+0x18>
+ 138:	21 30       	cpi	r18, 0x01	; 1
+ 13a:	31 05       	cpc	r19, r1
+ 13c:	09 f0       	breq	.+2      	; 0x140 <moveCar+0x16>
+ 13e:	51 c0       	rjmp	.+162    	; 0x1e2 <moveCar+0xb8>
+ 140:	27 c0       	rjmp	.+78     	; 0x190 <moveCar+0x66>
+
+	switch(move.state)
+	{
+	//move the car forward
+	case 0:	isForward=1; isLeft = 1;
+ 142:	21 e0       	ldi	r18, 0x01	; 1
+ 144:	30 e0       	ldi	r19, 0x00	; 0
+ 146:	30 93 11 01 	sts	0x0111, r19
+ 14a:	20 93 10 01 	sts	0x0110, r18
+ 14e:	30 93 03 01 	sts	0x0103, r19
+ 152:	20 93 02 01 	sts	0x0102, r18
+			if(delayCounter==8)
+ 156:	80 91 14 01 	lds	r24, 0x0114
+ 15a:	90 91 15 01 	lds	r25, 0x0115
+ 15e:	88 30       	cpi	r24, 0x08	; 8
+ 160:	91 05       	cpc	r25, r1
+ 162:	89 f4       	brne	.+34     	; 0x186 <moveCar+0x5c>
+			{
+				move.nextState=1;
+ 164:	30 93 0d 01 	sts	0x010D, r19
+ 168:	20 93 0c 01 	sts	0x010C, r18
+				delayCounter=0;
+ 16c:	10 92 15 01 	sts	0x0115, r1
+ 170:	10 92 14 01 	sts	0x0114, r1
+				isForward = 0;
+ 174:	10 92 11 01 	sts	0x0111, r1
+ 178:	10 92 10 01 	sts	0x0110, r1
+				isLeft = 0;
+ 17c:	10 92 03 01 	sts	0x0103, r1
+ 180:	10 92 02 01 	sts	0x0102, r1
+ 184:	2e c0       	rjmp	.+92     	; 0x1e2 <moveCar+0xb8>
+			}
+			else
+			{
+				move.nextState=0;
+ 186:	10 92 0d 01 	sts	0x010D, r1
+ 18a:	10 92 0c 01 	sts	0x010C, r1
+ 18e:	24 c0       	rjmp	.+72     	; 0x1d8 <moveCar+0xae>
+				delayCounter = delayCounter+1;
+			}
+			break;
+
+	//move the car reverse
+	case 1:	isReverse=1; isRight = 1;
+ 190:	30 93 17 01 	sts	0x0117, r19
+ 194:	20 93 16 01 	sts	0x0116, r18
+ 198:	30 93 01 01 	sts	0x0101, r19
+ 19c:	20 93 00 01 	sts	0x0100, r18
+			//delayCounter=delayCounter-1;
+			if(delayCounter==8)
+ 1a0:	80 91 14 01 	lds	r24, 0x0114
+ 1a4:	90 91 15 01 	lds	r25, 0x0115
+ 1a8:	88 30       	cpi	r24, 0x08	; 8
+ 1aa:	91 05       	cpc	r25, r1
+ 1ac:	89 f4       	brne	.+34     	; 0x1d0 <moveCar+0xa6>
+			{
+				move.nextState=0;
+ 1ae:	10 92 0d 01 	sts	0x010D, r1
+ 1b2:	10 92 0c 01 	sts	0x010C, r1
+				delayCounter=0;
+ 1b6:	10 92 15 01 	sts	0x0115, r1
+ 1ba:	10 92 14 01 	sts	0x0114, r1
+				isReverse = 0;
+ 1be:	10 92 17 01 	sts	0x0117, r1
+ 1c2:	10 92 16 01 	sts	0x0116, r1
+				isRight = 0;
+ 1c6:	10 92 01 01 	sts	0x0101, r1
+ 1ca:	10 92 00 01 	sts	0x0100, r1
+ 1ce:	09 c0       	rjmp	.+18     	; 0x1e2 <moveCar+0xb8>
+			}
+			else
+			{
+				move.nextState=1;
+ 1d0:	30 93 0d 01 	sts	0x010D, r19
+ 1d4:	20 93 0c 01 	sts	0x010C, r18
+				delayCounter = delayCounter+1;
+ 1d8:	01 96       	adiw	r24, 0x01	; 1
+ 1da:	90 93 15 01 	sts	0x0115, r25
+ 1de:	80 93 14 01 	sts	0x0114, r24
+			}
+			break;
+	default: break;
+	}//end switch
+
+	move.state = move.nextState;
+ 1e2:	80 91 0c 01 	lds	r24, 0x010C
+ 1e6:	90 91 0d 01 	lds	r25, 0x010D
+ 1ea:	90 93 0b 01 	sts	0x010B, r25
+ 1ee:	80 93 0a 01 	sts	0x010A, r24
+	_delay_ms(2000);
+	isForward = 0;
+	isReverse = 1;
+	_delay_ms(2000);
+	isReverse = 0;*/
+}
+ 1f2:	08 95       	ret
+
+000001f4 <masterStateMachine>:
+//********************************************************** 
+//masterStateMachine
+//State machine which controls actual motion of the car
+//********************************************************** 
+void masterStateMachine(void)
+{
+ 1f4:	80 91 04 01 	lds	r24, 0x0104
+ 1f8:	80 95       	com	r24
+ 1fa:	88 b9       	out	0x08, r24	; 8
+    masterBits = (fbBits<<2) + (lrBits);  // (FW FW)(LR LR)
+    PORTC = ~fb.state;
+    /*        01: Forward/Left
+              10: Backward/Right*/
+    
+    switch (masterBits)
+ 1fc:	20 91 08 01 	lds	r18, 0x0108
+ 200:	30 91 09 01 	lds	r19, 0x0109
+ 204:	22 0f       	add	r18, r18
+ 206:	33 1f       	adc	r19, r19
+ 208:	22 0f       	add	r18, r18
+ 20a:	33 1f       	adc	r19, r19
+ 20c:	80 91 1c 01 	lds	r24, 0x011C
+ 210:	90 91 1d 01 	lds	r25, 0x011D
+ 214:	28 0f       	add	r18, r24
+ 216:	39 1f       	adc	r19, r25
+ 218:	25 30       	cpi	r18, 0x05	; 5
+ 21a:	31 05       	cpc	r19, r1
+ 21c:	49 f1       	breq	.+82     	; 0x270 <masterStateMachine+0x7c>
+ 21e:	26 30       	cpi	r18, 0x06	; 6
+ 220:	31 05       	cpc	r19, r1
+ 222:	68 f4       	brcc	.+26     	; 0x23e <masterStateMachine+0x4a>
+ 224:	21 30       	cpi	r18, 0x01	; 1
+ 226:	31 05       	cpc	r19, r1
+ 228:	e9 f0       	breq	.+58     	; 0x264 <masterStateMachine+0x70>
+ 22a:	21 30       	cpi	r18, 0x01	; 1
+ 22c:	31 05       	cpc	r19, r1
+ 22e:	c0 f0       	brcs	.+48     	; 0x260 <masterStateMachine+0x6c>
+ 230:	22 30       	cpi	r18, 0x02	; 2
+ 232:	31 05       	cpc	r19, r1
+ 234:	c9 f0       	breq	.+50     	; 0x268 <masterStateMachine+0x74>
+ 236:	24 30       	cpi	r18, 0x04	; 4
+ 238:	31 05       	cpc	r19, r1
+ 23a:	29 f5       	brne	.+74     	; 0x286 <masterStateMachine+0x92>
+ 23c:	17 c0       	rjmp	.+46     	; 0x26c <masterStateMachine+0x78>
+ 23e:	28 30       	cpi	r18, 0x08	; 8
+ 240:	31 05       	cpc	r19, r1
+ 242:	d1 f0       	breq	.+52     	; 0x278 <masterStateMachine+0x84>
+ 244:	29 30       	cpi	r18, 0x09	; 9
+ 246:	31 05       	cpc	r19, r1
+ 248:	20 f4       	brcc	.+8      	; 0x252 <masterStateMachine+0x5e>
+ 24a:	26 30       	cpi	r18, 0x06	; 6
+ 24c:	31 05       	cpc	r19, r1
+ 24e:	d9 f4       	brne	.+54     	; 0x286 <masterStateMachine+0x92>
+ 250:	11 c0       	rjmp	.+34     	; 0x274 <masterStateMachine+0x80>
+ 252:	29 30       	cpi	r18, 0x09	; 9
+ 254:	31 05       	cpc	r19, r1
+ 256:	91 f0       	breq	.+36     	; 0x27c <masterStateMachine+0x88>
+ 258:	2a 30       	cpi	r18, 0x0A	; 10
+ 25a:	31 05       	cpc	r19, r1
+ 25c:	a1 f4       	brne	.+40     	; 0x286 <masterStateMachine+0x92>
+ 25e:	11 c0       	rjmp	.+34     	; 0x282 <masterStateMachine+0x8e>
+end
+
+//**********************************************************
+void stop(void)
+begin
+	PORTB=0x00;		//stop:			00,00
+ 260:	15 b8       	out	0x05, r1	; 5
+ 262:	08 95       	ret
+}
+
+//********************************************************** 
+void turnLeft(void)
+begin
+	PORTB= 0xA0;	//turn left:	hl,lr: 10,00
+ 264:	80 ea       	ldi	r24, 0xA0	; 160
+ 266:	0b c0       	rjmp	.+22     	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void turnRight(void)
+begin
+	PORTB= 0x60;	//turn right:	hr,ll: 01,00
+ 268:	80 e6       	ldi	r24, 0x60	; 96
+ 26a:	09 c0       	rjmp	.+18     	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void forward(void)
+begin
+	PORTB= 0x0A;	//forward:		hl,lr: 00,10
+ 26c:	8a e0       	ldi	r24, 0x0A	; 10
+ 26e:	07 c0       	rjmp	.+14     	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void forwardLeft(void)
+begin
+	PORTB= (0x0A)|(0xA0);	
+ 270:	8a ea       	ldi	r24, 0xAA	; 170
+ 272:	05 c0       	rjmp	.+10     	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void forwardRight(void)
+begin
+	PORTB= (0x0A)|(0x60);	
+ 274:	8a e6       	ldi	r24, 0x6A	; 106
+ 276:	03 c0       	rjmp	.+6      	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void reverse(void)
+begin
+	PORTB= 0x06;	//reverse:		hr,ll: 00,01
+ 278:	86 e0       	ldi	r24, 0x06	; 6
+ 27a:	01 c0       	rjmp	.+2      	; 0x27e <masterStateMachine+0x8a>
+end
+
+//********************************************************** 
+void reverseLeft(void)
+begin
+	PORTB= (0x06)|(0xA0);
+ 27c:	86 ea       	ldi	r24, 0xA6	; 166
+ 27e:	85 b9       	out	0x05, r24	; 5
+ 280:	08 95       	ret
+end
+
+//********************************************************** 
+void reverseRight(void)
+begin
+	PORTB= (0x06)|(0x60);
+ 282:	86 e6       	ldi	r24, 0x66	; 102
+ 284:	85 b9       	out	0x05, r24	; 5
+ 286:	08 95       	ret
+
+00000288 <fbStateMachine>:
+//********************************************************** 
+//fwStateMachine
+//State machine which control the forward backward motion of the car
+//********************************************************** 
+void fbStateMachine(void)
+{
+ 288:	20 91 04 01 	lds	r18, 0x0104
+ 28c:	30 91 05 01 	lds	r19, 0x0105
+ 290:	22 30       	cpi	r18, 0x02	; 2
+ 292:	31 05       	cpc	r19, r1
+ 294:	09 f4       	brne	.+2      	; 0x298 <fbStateMachine+0x10>
+ 296:	59 c0       	rjmp	.+178    	; 0x34a <fbStateMachine+0xc2>
+ 298:	23 30       	cpi	r18, 0x03	; 3
+ 29a:	31 05       	cpc	r19, r1
+ 29c:	40 f4       	brcc	.+16     	; 0x2ae <fbStateMachine+0x26>
+ 29e:	21 15       	cp	r18, r1
+ 2a0:	31 05       	cpc	r19, r1
+ 2a2:	69 f0       	breq	.+26     	; 0x2be <fbStateMachine+0x36>
+ 2a4:	21 30       	cpi	r18, 0x01	; 1
+ 2a6:	31 05       	cpc	r19, r1
+ 2a8:	09 f0       	breq	.+2      	; 0x2ac <fbStateMachine+0x24>
+ 2aa:	53 c0       	rjmp	.+166    	; 0x352 <fbStateMachine+0xca>
+ 2ac:	1e c0       	rjmp	.+60     	; 0x2ea <fbStateMachine+0x62>
+ 2ae:	23 30       	cpi	r18, 0x03	; 3
+ 2b0:	31 05       	cpc	r19, r1
+ 2b2:	89 f1       	breq	.+98     	; 0x316 <fbStateMachine+0x8e>
+ 2b4:	24 30       	cpi	r18, 0x04	; 4
+ 2b6:	31 05       	cpc	r19, r1
+ 2b8:	09 f0       	breq	.+2      	; 0x2bc <fbStateMachine+0x34>
+ 2ba:	4b c0       	rjmp	.+150    	; 0x352 <fbStateMachine+0xca>
+ 2bc:	46 c0       	rjmp	.+140    	; 0x34a <fbStateMachine+0xc2>
+    switch (fb.state)
+    {
+    case 0: //Rest State
+            if (isForward)
+ 2be:	80 91 10 01 	lds	r24, 0x0110
+ 2c2:	90 91 11 01 	lds	r25, 0x0111
+ 2c6:	89 2b       	or	r24, r25
+ 2c8:	19 f0       	breq	.+6      	; 0x2d0 <fbStateMachine+0x48>
+               fb.nextState = 1;
+ 2ca:	81 e0       	ldi	r24, 0x01	; 1
+ 2cc:	90 e0       	ldi	r25, 0x00	; 0
+ 2ce:	08 c0       	rjmp	.+16     	; 0x2e0 <fbStateMachine+0x58>
+            else if (isReverse)
+ 2d0:	80 91 16 01 	lds	r24, 0x0116
+ 2d4:	90 91 17 01 	lds	r25, 0x0117
+ 2d8:	89 2b       	or	r24, r25
+ 2da:	b9 f1       	breq	.+110    	; 0x34a <fbStateMachine+0xc2>
+               fb.nextState = 3;
+ 2dc:	83 e0       	ldi	r24, 0x03	; 3
+ 2de:	90 e0       	ldi	r25, 0x00	; 0
+ 2e0:	90 93 07 01 	sts	0x0107, r25
+ 2e4:	80 93 06 01 	sts	0x0106, r24
+ 2e8:	34 c0       	rjmp	.+104    	; 0x352 <fbStateMachine+0xca>
+            else
+               fb.nextState = 0;
+            break;
+
+    case 1: //Go Forward
+            if (isForward)
+ 2ea:	80 91 10 01 	lds	r24, 0x0110
+ 2ee:	90 91 11 01 	lds	r25, 0x0111
+ 2f2:	89 2b       	or	r24, r25
+ 2f4:	49 f0       	breq	.+18     	; 0x308 <fbStateMachine+0x80>
+               {
+               fb.nextState = 1;
+ 2f6:	30 93 07 01 	sts	0x0107, r19
+ 2fa:	20 93 06 01 	sts	0x0106, r18
+               fb.controlBits = 1;
+ 2fe:	30 93 09 01 	sts	0x0109, r19
+ 302:	20 93 08 01 	sts	0x0108, r18
+ 306:	25 c0       	rjmp	.+74     	; 0x352 <fbStateMachine+0xca>
+               }
+            else
+               {
+               fb.nextState = 2;
+ 308:	82 e0       	ldi	r24, 0x02	; 2
+ 30a:	90 e0       	ldi	r25, 0x00	; 0
+ 30c:	90 93 07 01 	sts	0x0107, r25
+ 310:	80 93 06 01 	sts	0x0106, r24
+ 314:	15 c0       	rjmp	.+42     	; 0x340 <fbStateMachine+0xb8>
+			//1second delay
+            fb.nextState = 0;
+            break;
+
+    case 3: //Reverse   
+            if (isReverse)
+ 316:	80 91 16 01 	lds	r24, 0x0116
+ 31a:	90 91 17 01 	lds	r25, 0x0117
+ 31e:	89 2b       	or	r24, r25
+ 320:	39 f0       	breq	.+14     	; 0x330 <fbStateMachine+0xa8>
+               {
+               fb.nextState = 3;
+ 322:	30 93 07 01 	sts	0x0107, r19
+ 326:	20 93 06 01 	sts	0x0106, r18
+               fb.controlBits = 2;
+ 32a:	82 e0       	ldi	r24, 0x02	; 2
+ 32c:	90 e0       	ldi	r25, 0x00	; 0
+ 32e:	08 c0       	rjmp	.+16     	; 0x340 <fbStateMachine+0xb8>
+               }
+            else
+               {
+               fb.nextState = 4;
+ 330:	84 e0       	ldi	r24, 0x04	; 4
+ 332:	90 e0       	ldi	r25, 0x00	; 0
+ 334:	90 93 07 01 	sts	0x0107, r25
+ 338:	80 93 06 01 	sts	0x0106, r24
+               fb.controlBits = 1;
+ 33c:	81 e0       	ldi	r24, 0x01	; 1
+ 33e:	90 e0       	ldi	r25, 0x00	; 0
+ 340:	90 93 09 01 	sts	0x0109, r25
+ 344:	80 93 08 01 	sts	0x0108, r24
+ 348:	04 c0       	rjmp	.+8      	; 0x352 <fbStateMachine+0xca>
+               }
+            break;       
+
+    case 4: //1second Forward to stop the car
+			//1second delay 
+            fb.nextState = 0;
+ 34a:	10 92 07 01 	sts	0x0107, r1
+ 34e:	10 92 06 01 	sts	0x0106, r1
+            break;
+    }
+	fb.state = fb.nextState;  
+ 352:	80 91 06 01 	lds	r24, 0x0106
+ 356:	90 91 07 01 	lds	r25, 0x0107
+ 35a:	90 93 05 01 	sts	0x0105, r25
+ 35e:	80 93 04 01 	sts	0x0104, r24
+}
+ 362:	08 95       	ret
+
+00000364 <lrStateMachine>:
+//********************************************************** 
+//lrStateMachine
+//State machine which control the left right motion of the car
+//********************************************************** 
+void lrStateMachine(void)
+{
+ 364:	20 91 18 01 	lds	r18, 0x0118
+ 368:	30 91 19 01 	lds	r19, 0x0119
+ 36c:	22 30       	cpi	r18, 0x02	; 2
+ 36e:	31 05       	cpc	r19, r1
+ 370:	09 f4       	brne	.+2      	; 0x374 <lrStateMachine+0x10>
+ 372:	59 c0       	rjmp	.+178    	; 0x426 <lrStateMachine+0xc2>
+ 374:	23 30       	cpi	r18, 0x03	; 3
+ 376:	31 05       	cpc	r19, r1
+ 378:	40 f4       	brcc	.+16     	; 0x38a <lrStateMachine+0x26>
+ 37a:	21 15       	cp	r18, r1
+ 37c:	31 05       	cpc	r19, r1
+ 37e:	69 f0       	breq	.+26     	; 0x39a <lrStateMachine+0x36>
+ 380:	21 30       	cpi	r18, 0x01	; 1
+ 382:	31 05       	cpc	r19, r1
+ 384:	09 f0       	breq	.+2      	; 0x388 <lrStateMachine+0x24>
+ 386:	53 c0       	rjmp	.+166    	; 0x42e <lrStateMachine+0xca>
+ 388:	1e c0       	rjmp	.+60     	; 0x3c6 <lrStateMachine+0x62>
+ 38a:	23 30       	cpi	r18, 0x03	; 3
+ 38c:	31 05       	cpc	r19, r1
+ 38e:	89 f1       	breq	.+98     	; 0x3f2 <lrStateMachine+0x8e>
+ 390:	24 30       	cpi	r18, 0x04	; 4
+ 392:	31 05       	cpc	r19, r1
+ 394:	09 f0       	breq	.+2      	; 0x398 <lrStateMachine+0x34>
+ 396:	4b c0       	rjmp	.+150    	; 0x42e <lrStateMachine+0xca>
+ 398:	46 c0       	rjmp	.+140    	; 0x426 <lrStateMachine+0xc2>
+    switch (lr.state)
+    {
+    case 0: //Rest State
+            if (isLeft)
+ 39a:	80 91 02 01 	lds	r24, 0x0102
+ 39e:	90 91 03 01 	lds	r25, 0x0103
+ 3a2:	89 2b       	or	r24, r25
+ 3a4:	19 f0       	breq	.+6      	; 0x3ac <lrStateMachine+0x48>
+               lr.nextState = 1;
+ 3a6:	81 e0       	ldi	r24, 0x01	; 1
+ 3a8:	90 e0       	ldi	r25, 0x00	; 0
+ 3aa:	08 c0       	rjmp	.+16     	; 0x3bc <lrStateMachine+0x58>
+            else if (isRight)
+ 3ac:	80 91 00 01 	lds	r24, 0x0100
+ 3b0:	90 91 01 01 	lds	r25, 0x0101
+ 3b4:	89 2b       	or	r24, r25
+ 3b6:	b9 f1       	breq	.+110    	; 0x426 <lrStateMachine+0xc2>
+               lr.nextState = 3;
+ 3b8:	83 e0       	ldi	r24, 0x03	; 3
+ 3ba:	90 e0       	ldi	r25, 0x00	; 0
+ 3bc:	90 93 1b 01 	sts	0x011B, r25
+ 3c0:	80 93 1a 01 	sts	0x011A, r24
+ 3c4:	34 c0       	rjmp	.+104    	; 0x42e <lrStateMachine+0xca>
+            else
+               lr.nextState = 0;
+            break;
+
+    case 1: //Go Forward
+            if (isLeft)
+ 3c6:	80 91 02 01 	lds	r24, 0x0102
+ 3ca:	90 91 03 01 	lds	r25, 0x0103
+ 3ce:	89 2b       	or	r24, r25
+ 3d0:	49 f0       	breq	.+18     	; 0x3e4 <lrStateMachine+0x80>
+               {
+               lr.nextState = 1;
+ 3d2:	30 93 1b 01 	sts	0x011B, r19
+ 3d6:	20 93 1a 01 	sts	0x011A, r18
+               lr.controlBits = 1;
+ 3da:	30 93 1d 01 	sts	0x011D, r19
+ 3de:	20 93 1c 01 	sts	0x011C, r18
+ 3e2:	25 c0       	rjmp	.+74     	; 0x42e <lrStateMachine+0xca>
+               }
+            else
+               {
+               lr.nextState = 2;
+ 3e4:	82 e0       	ldi	r24, 0x02	; 2
+ 3e6:	90 e0       	ldi	r25, 0x00	; 0
+ 3e8:	90 93 1b 01 	sts	0x011B, r25
+ 3ec:	80 93 1a 01 	sts	0x011A, r24
+ 3f0:	15 c0       	rjmp	.+42     	; 0x41c <lrStateMachine+0xb8>
+			//1second delay
+            lr.nextState = 0;
+            break;
+
+    case 3: //Reverse   
+            if (isReverse)
+ 3f2:	80 91 16 01 	lds	r24, 0x0116
+ 3f6:	90 91 17 01 	lds	r25, 0x0117
+ 3fa:	89 2b       	or	r24, r25
+ 3fc:	39 f0       	breq	.+14     	; 0x40c <lrStateMachine+0xa8>
+               {
+               lr.nextState = 3;
+ 3fe:	30 93 1b 01 	sts	0x011B, r19
+ 402:	20 93 1a 01 	sts	0x011A, r18
+               lr.controlBits = 2;
+ 406:	82 e0       	ldi	r24, 0x02	; 2
+ 408:	90 e0       	ldi	r25, 0x00	; 0
+ 40a:	08 c0       	rjmp	.+16     	; 0x41c <lrStateMachine+0xb8>
+               }
+            else
+               {
+               lr.nextState = 4;
+ 40c:	84 e0       	ldi	r24, 0x04	; 4
+ 40e:	90 e0       	ldi	r25, 0x00	; 0
+ 410:	90 93 1b 01 	sts	0x011B, r25
+ 414:	80 93 1a 01 	sts	0x011A, r24
+               lr.controlBits = 1;
+ 418:	81 e0       	ldi	r24, 0x01	; 1
+ 41a:	90 e0       	ldi	r25, 0x00	; 0
+ 41c:	90 93 1d 01 	sts	0x011D, r25
+ 420:	80 93 1c 01 	sts	0x011C, r24
+ 424:	04 c0       	rjmp	.+8      	; 0x42e <lrStateMachine+0xca>
+               }
+            break;       
+
+    case 4: //1second Forward to stop the car
+			//1second delay 
+            lr.nextState = 0;
+ 426:	10 92 1b 01 	sts	0x011B, r1
+ 42a:	10 92 1a 01 	sts	0x011A, r1
+            break;
+    }
+	lr.state = lr.nextState;  
+ 42e:	80 91 1a 01 	lds	r24, 0x011A
+ 432:	90 91 1b 01 	lds	r25, 0x011B
+ 436:	90 93 19 01 	sts	0x0119, r25
+ 43a:	80 93 18 01 	sts	0x0118, r24
+}
+ 43e:	08 95       	ret
+
+00000440 <turnLeft>:
+
+//********************************************************** 
+void turnLeft(void)
+begin
+ 440:	80 ea       	ldi	r24, 0xA0	; 160
+ 442:	85 b9       	out	0x05, r24	; 5
+	PORTB= 0xA0;	//turn left:	hl,lr: 10,00
+	//PORTC= 0xF7;
+end
+ 444:	08 95       	ret
+
+00000446 <turnRight>:
+
+//********************************************************** 
+void turnRight(void)
+begin
+ 446:	80 e6       	ldi	r24, 0x60	; 96
+ 448:	85 b9       	out	0x05, r24	; 5
+	PORTB= 0x60;	//turn right:	hr,ll: 01,00
+	//PORTC= 0xFB;
+end
+ 44a:	08 95       	ret
+
+0000044c <forward>:
+
+//********************************************************** 
+void forward(void)
+begin
+ 44c:	8a e0       	ldi	r24, 0x0A	; 10
+ 44e:	85 b9       	out	0x05, r24	; 5
+	PORTB= 0x0A;	//forward:		hl,lr: 00,10
+	//PORTC= 0xFD;
+end
+ 450:	08 95       	ret
+
+00000452 <reverse>:
+
+//********************************************************** 
+void reverse(void)
+begin
+ 452:	86 e0       	ldi	r24, 0x06	; 6
+ 454:	85 b9       	out	0x05, r24	; 5
+	PORTB= 0x06;	//reverse:		hr,ll: 00,01
+	//PORTC= 0xFE;
+end
+ 456:	08 95       	ret
+
+00000458 <stop>:
+
+//**********************************************************
+void stop(void)
+begin
+ 458:	15 b8       	out	0x05, r1	; 5
+	PORTB=0x00;		//stop:			00,00
+	//PORTC= 0x00;
+end
+ 45a:	08 95       	ret
+
+0000045c <forwardLeft>:
+
+//********************************************************** 
+void forwardLeft(void)
+begin
+ 45c:	8a ea       	ldi	r24, 0xAA	; 170
+ 45e:	85 b9       	out	0x05, r24	; 5
+	PORTB= (0x0A)|(0xA0);	
+    //forward:		hl,lr: 00,10
+    //turn left:	hl,lr: 10,00
+	//PORTC= 0xF5;
+end
+ 460:	08 95       	ret
+
+00000462 <forwardRight>:
+
+//********************************************************** 
+void forwardRight(void)
+begin
+ 462:	8a e6       	ldi	r24, 0x6A	; 106
+ 464:	85 b9       	out	0x05, r24	; 5
+	PORTB= (0x0A)|(0x60);	
+    //forward:		hl,lr: 00,10
+	//turn right:	hr,ll: 01,00
+	//PORTC= 0xF9;
+end
+ 466:	08 95       	ret
+
+00000468 <reverseLeft>:
+
+//********************************************************** 
+void reverseLeft(void)
+begin
+ 468:	86 ea       	ldi	r24, 0xA6	; 166
+ 46a:	85 b9       	out	0x05, r24	; 5
+	PORTB= (0x06)|(0xA0);
+	//reverse:		hr,ll: 00,01
+	//turn left:	hl,lr: 10,00
+	//PORTC= 0xF6;
+end
+ 46c:	08 95       	ret
+
+0000046e <reverseRight>:
+
+//********************************************************** 
+void reverseRight(void)
+begin
+ 46e:	86 e6       	ldi	r24, 0x66	; 102
+ 470:	85 b9       	out	0x05, r24	; 5
+	PORTB= (0x06)|(0x60);
+	//reverse:		hr,ll: 00,01
+	//turn right:	hr,ll: 01,00
+	//PORTC= 0xFA;
+end
+ 472:	08 95       	ret
+
+00000474 <initialize>:
+
+
+
+//********************************************************** 
+void initialize(void)
+begin
+ 474:	92 e0       	ldi	r25, 0x02	; 2
+ 476:	90 93 6e 00 	sts	0x006E, r25
+           
+  //set up timer 0 for 1 mSec timebase 
+  TIMSK0= (1<<OCIE0A);	//turn on timer 0 cmp match ISR 
+  OCR0A = 249;  		//set the compare re to 250 time ticks
+ 47a:	89 ef       	ldi	r24, 0xF9	; 249
+ 47c:	87 bd       	out	0x27, r24	; 39
+  //set prescalar to divide by 64 
+  TCCR0B= 3; //0b00001011;	
+ 47e:	83 e0       	ldi	r24, 0x03	; 3
+ 480:	85 bd       	out	0x25, r24	; 37
+  // turn on clear-on-match
+  TCCR0A= (1<<WGM01) ;
+ 482:	94 bd       	out	0x24, r25	; 36
+
+  //set up timer1 for full speed and
+  //capture an edge on analog comparator pin B.3 
+  //Set capture to positive edge, full counting rate
+  TCCR1B = (1<<ICES1) + 1; 
+ 484:	81 e4       	ldi	r24, 0x41	; 65
+ 486:	80 93 81 00 	sts	0x0081, r24
+  // Turn on timer1 interrupt-on-capture
+  TIMSK1 = (1<<ICIE1) ;
+ 48a:	80 e2       	ldi	r24, 0x20	; 32
+ 48c:	80 93 6f 00 	sts	0x006F, r24
+
+  //Set up port A
+  //for pushbuttons to control car	
+  DDRA=0x00;
+ 490:	11 b8       	out	0x01, r1	; 1
+  PINA=0;
+ 492:	10 b8       	out	0x00, r1	; 0
+
+  //Set up port B
+  //output to H-Bridge
+  DDRB=0xFF;
+ 494:	8f ef       	ldi	r24, 0xFF	; 255
+ 496:	84 b9       	out	0x04, r24	; 4
+  PORTB=0x00;
+ 498:	15 b8       	out	0x05, r1	; 5
+
+  //Set up port C
+  //LEDs
+  DDRC=0xFF;
+ 49a:	87 b9       	out	0x07, r24	; 7
+  PORTC=0xFF;
+ 49c:	88 b9       	out	0x08, r24	; 8
+
+  //Setting up structure intializations
+  fb.controlBits = 0;
+ 49e:	10 92 09 01 	sts	0x0109, r1
+ 4a2:	10 92 08 01 	sts	0x0108, r1
+  lr.controlBits = 0;
+ 4a6:	10 92 1d 01 	sts	0x011D, r1
+ 4aa:	10 92 1c 01 	sts	0x011C, r1
+
+  delayCounter = 0;
+ 4ae:	10 92 15 01 	sts	0x0115, r1
+ 4b2:	10 92 14 01 	sts	0x0114, r1
+  //crank up the ISRs
+  sei();
+ 4b6:	78 94       	sei
+
+end  
+ 4b8:	08 95       	ret
+
+000004ba <main>:
+*/
+
+//**********************************************************       
+//Entry point and task scheduler loop
+int main(void)
+begin  
+ 4ba:	0f 93       	push	r16
+ 4bc:	1f 93       	push	r17
+ 4be:	cf 93       	push	r28
+ 4c0:	df 93       	push	r29
+  initialize();
+ 4c2:	0e 94 3a 02 	call	0x474	; 0x474 <initialize>
+  while(1)
+  begin
+	
+	if (time0 == 0)
+	{
+		time0=t0;
+ 4c6:	c2 e3       	ldi	r28, 0x32	; 50
+ 4c8:	d0 e0       	ldi	r29, 0x00	; 0
+		time1=t1;
+		fbStateMachine();
+	}
+	if (time2 == 0)
+	{
+		time2=t2;
+ 4ca:	0a ef       	ldi	r16, 0xFA	; 250
+ 4cc:	10 e0       	ldi	r17, 0x00	; 0
+  
+  // main task scheduler loop
+  while(1)
+  begin
+	
+	if (time0 == 0)
+ 4ce:	80 91 1e 01 	lds	r24, 0x011E
+ 4d2:	90 91 1f 01 	lds	r25, 0x011F
+ 4d6:	89 2b       	or	r24, r25
+ 4d8:	31 f4       	brne	.+12     	; 0x4e6 <main+0x2c>
+	{
+		time0=t0;
+ 4da:	d0 93 1f 01 	sts	0x011F, r29
+ 4de:	c0 93 1e 01 	sts	0x011E, r28
+		lrStateMachine();
+ 4e2:	0e 94 b2 01 	call	0x364	; 0x364 <lrStateMachine>
+	}
+	if (time1 == 0)
+ 4e6:	80 91 12 01 	lds	r24, 0x0112
+ 4ea:	90 91 13 01 	lds	r25, 0x0113
+ 4ee:	89 2b       	or	r24, r25
+ 4f0:	31 f4       	brne	.+12     	; 0x4fe <main+0x44>
+	{
+		time1=t1;
+ 4f2:	d0 93 13 01 	sts	0x0113, r29
+ 4f6:	c0 93 12 01 	sts	0x0112, r28
+		fbStateMachine();
+ 4fa:	0e 94 44 01 	call	0x288	; 0x288 <fbStateMachine>
+	}
+	if (time2 == 0)
+ 4fe:	80 91 20 01 	lds	r24, 0x0120
+ 502:	90 91 21 01 	lds	r25, 0x0121
+ 506:	89 2b       	or	r24, r25
+ 508:	31 f4       	brne	.+12     	; 0x516 <main+0x5c>
+	{
+		time2=t2;
+ 50a:	10 93 21 01 	sts	0x0121, r17
+ 50e:	00 93 20 01 	sts	0x0120, r16
+		moveCar();
+ 512:	0e 94 95 00 	call	0x12a	; 0x12a <moveCar>
+	}
+	masterStateMachine();
+ 516:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <masterStateMachine>
+ 51a:	d9 cf       	rjmp	.-78     	; 0x4ce <main+0x14>
+
+0000051c <_exit>:
+ 51c:	f8 94       	cli
+
+0000051e <__stop_program>:
+ 51e:	ff cf       	rjmp	.-2      	; 0x51e <__stop_program>

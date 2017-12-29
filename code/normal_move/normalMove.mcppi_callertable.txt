@@ -1,0 +1,15 @@
+main
+	__CC2DW
+	PWM1_Init
+	move_car_f
+		PWM1_Start
+		PWM1_Set_Duty
+			Mul_16x16_U
+	ADC_Read
+		Delay_22us
+	move_car_b
+		PWM1_Start
+		PWM1_Set_Duty
+			Mul_16x16_U
+	stop_car_b
+		PWM1_Stop

@@ -1,0 +1,37 @@
+function sidesens1
+
+close all
+
+% 20cm-150cm
+% distance=[5:5:90];
+% voltage=[1.8,2.5,2.68,2.46,2.26,2.04,1.82,1.6,1.42,1.27,1.16,1.07,.984,.928,.856,.808,.76,.728]
+% 
+% distance=[15:5:90];
+% voltage=[,.5,.456,.42,.4];
+
+% 10cm-80cm
+distance=[10:5:80]
+voltage=[2.52,1.78,1.39,1.13,.96,.824,.736,.696,.664,.612,.56,.52,.484,.428,.388];
+
+invdist=1./distance;
+
+[line1]=polyfit(invdist,voltage,1)
+
+
+figure(1)
+hold on
+plot(distance,voltage,'b.');
+
+xlabel('distance')
+ylabel('voltage')
+hold off
+
+
+figure(2)
+hold on
+plot(invdist,voltage,'b.');
+plot(invdist,polyval(line1,invdist,'g'));
+
+xlabel('1/distance')
+ylabel('voltage')
+hold off
